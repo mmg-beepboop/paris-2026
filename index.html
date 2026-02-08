@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paris April 2026 â Day by Day</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #f7f5f0;
+    color: #2c2c2c;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
+    color: #fff;
+    padding: 28px 20px 18px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  header p {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin-top: 4px;
+  }
+  .day-tabs {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    border-bottom: 1px solid #e0ddd6;
+    padding: 0 8px;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .day-tabs::-webkit-scrollbar { display: none; }
+  .day-tab {
+    flex-shrink: 0;
+    padding: 14px 16px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .day-tab:hover { color: #555; }
+  .day-tab.active {
+    color: #2d3561;
+    border-bottom-color: #c9a94e;
+  }
+  .day-tab .tab-day { display: block; font-size: 0.72rem; opacity: 0.65; margin-top: 2px; }
+  .content { max-width: 600px; margin: 0 auto; padding: 16px 16px 100px; }
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .day-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .day-header .day-meta {
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 4px;
+  }
+  .route-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #2d3561, #1a1a2e);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 24px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: none;
+  }
+  .route-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+  .route-btn svg { width: 16px; height: 16px; }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #c9a94e;
+    margin: 24px 0 10px;
+    padding-left: 4px;
+  }
+  .stop-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: box-shadow 0.15s;
+  }
+  .stop-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .stop-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 2px;
+  }
+  .cat-food { background: #d4785c; }
+  .cat-sight { background: #2d3561; }
+  .cat-kids { background: #5a9e6f; }
+  .cat-activity { background: #8b6fc0; }
+  .cat-hotel { background: #c9a94e; }
+  .cat-shop { background: #cc7eb1; }
+  .cat-walk { background: #6ba3be; }
+  .stop-info { flex: 1; min-width: 0; }
+  .stop-name {
+    font-size: 0.92rem;
+    font-weight: 650;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+  .stop-address {
+    font-size: 0.78rem;
+    color: #999;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .stop-notes {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  .stop-notes strong { color: #c9a94e; font-weight: 600; }
+  .stop-actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #2d3561;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #f0eee8;
+    transition: background 0.15s;
+  }
+  .nav-link:hover { background: #e5e2d9; }
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  .badge-reserve { background: #fef3cd; color: #856404; }
+  .badge-booked { background: #d4edda; color: #155724; }
+  .badge-tip { background: #e8e0f0; color: #5a3d7a; }
+  .badge-time { background: #dbeafe; color: #1e40af; }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 20px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    color: #888;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .day-content { display: none; }
+  .day-content.active { display: block; }
+  @media (max-width: 420px) {
+    .content { padding: 12px 12px 80px; }
+    .stop-card { padding: 12px; }
+    header { padding: 22px 16px 14px; }
+    header h1 { font-size: 1.35rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Paris &mdash; April 2026</h1>
+  <p>Day-by-Day Walking Guide &bull; Tap any stop to navigate</p>
+</header>
+
+<div class="day-tabs" id="dayTabs"></div>
+
+<div class="content" id="content"></div>
+
+<script>
+const DAYS = [
+  {
+    date: "Thu Apr 9",
+    title: "Arrival & the Islands",
+    subtitle: "Notre Dame, Seine cruise, ice cream on \u00cele Saint-Louis",
+    sections: [
+      { label: "Settle In", stops: [
+        { name: "Pavillon de la Reine", addr: "28 Place des Vosges, 75003 Paris", cat: "hotel", notes: "Hotel check-in ~2:30p. Tel: +33 1 40 29 19 19", badge: "booked" },
+      ]},
+      { label: "\u00cele Saint-Louis & Notre Dame", stops: [
+        { name: "Berthillon", addr: "31 Rue Saint-Louis en l'\u00cele, 75004 Paris", cat: "food", notes: "Famous ice cream & hot chocolate. Closed Mon & Tue. Takeaway or sit in tea room." },
+        { name: "Noir Coffee Shop", addr: "63 Rue Saint-Louis en l'\u00cele, 75004 Paris", cat: "food", notes: "Great coffee option on the island" },
+        { name: "Notre Dame Cathedral", addr: "Notre Dame Cathedral, Paris", cat: "sight", notes: "Walk past or go in \u2014 line moves fast. Tickets available 48hrs before but platform is unreliable." },
+        { name: "Shakespeare & Company", addr: "37 Rue de la B\u00fbcherie, 75005 Paris", cat: "sight", notes: "Cute kids\u2019 section with Paris-themed EN books. Ask for a stamp! Open daily ~10AM, Sun noon." },
+        { name: "La Maison d\u2019Isabelle", addr: "47ter Boulevard Saint-Germain, 75005 Paris", cat: "food", notes: "Best croissant in the area! Closed Mondays.", badge: "tip" },
+      ]},
+      { label: "Seine River Cruise", stops: [
+        { name: "Les Vedettes du Pont Neuf", addr: "Square du Vert-Galant, 75001 Paris", cat: "activity", notes: "1-hour discovery cruise. Buy \u2018open tickets\u2019. Arrive 20 min early for seats. Green space nearby for kids.", badge: "reserve" },
+        { name: "Weeping Willow Viewpoint", addr: "Square du Vert-Galant, 75001 Paris", cat: "sight", notes: "Tip of the island for the view. Look for the floating fire station on the south side." },
+      ]},
+      { label: "Late Afternoon", stops: [
+        { name: "Kids Climbing Wall", addr: "140 Voie Georges Pompidou, 75001 Paris", cat: "kids", notes: "Between Pont Neuf and Pont au Change, north bank" },
+      ]},
+      { label: "Dinner near Hotel", stops: [
+        { name: "Carette", addr: "25 Place des Vosges, 75003 Paris", cat: "food", notes: "Famous hot chocolate & breakfast spot" },
+        { name: "Chez Janou", addr: "2 Rue Roger Verlomme, 75003 Paris", cat: "food", notes: "Reserve via website. 2 min walk from hotel.", badge: "reserve" },
+        { name: "Breizh Caf\u00e9 Marais", addr: "109 Rue Vieille du Temple, 75003 Paris", cat: "food", notes: "Crepes! 10 min walk" },
+        { name: "L\u2019As du Fallafel", addr: "34 Rue des Rosiers, 75004 Paris", cat: "food", notes: "Most famous falafel on Rue des Rosiers. Closed Saturdays. No reservations. 10 min walk." },
+        { name: "BigLove", addr: "30 Rue Debelleyme, 75003 Paris", cat: "food", notes: "Italian. 10 min walk. Reserve.", badge: "reserve" },
+        { name: "Jaja", addr: "3 Rue Sainte-Croix de la Bretonnerie, 75004 Paris", cat: "food", notes: "10 min walk. Reserve. No kids menu but works for adventurous eaters.", badge: "reserve" },
+      ]},
+    ]
+  },
+  {
+    date: "Fri Apr 10",
+    title: "Marais & Eiffel Tower",
+    subtitle: "Explore the neighborhood, then the Iron Lady at golden hour",
+    sections: [
+      { label: "Morning \u2014 The Marais", stops: [
+        { name: "Place des Vosges", addr: "Place des Vosges, 75003 Paris", cat: "sight", notes: "Beautiful historic square right outside the hotel" },
+        { name: "Rue de Turenne", addr: "Rue de Turenne, 75003 Paris", cat: "walk", notes: "Explore the shops and atmosphere" },
+        { name: "Square du Temple", addr: "Square du Temple Elie Wiesel, 75003 Paris", cat: "kids", notes: "Playground for the kids" },
+        { name: "Bontemps P\u00e2tisserie", addr: "57 Rue de Bretagne, 75003 Paris", cat: "food", notes: "Closed Mon & Tue, opens at 11AM" },
+        { name: "March\u00e9 des Enfants Rouges", addr: "39 Rue de Bretagne, 75003 Paris", cat: "food", notes: "Fun covered market with food stalls \u2014 great for lunch. No reservations needed." },
+      ]},
+      { label: "Optional \u2014 3PM", stops: [
+        { name: "Galeries Lafayette Fashion Show", addr: "40 Boulevard Haussmann, 75009 Paris", cat: "activity", notes: "Fridays at 3PM. Adults \u20ac25 / Kids \u20ac15", badge: "reserve" },
+      ]},
+      { label: "Afternoon \u2014 Eiffel Tower Area", stops: [
+        { name: "Hidden Eiffel View", addr: "Rue de l'Universit\u00e9 and Avenue de la Bourdonnais, 75007 Paris", cat: "sight", notes: "Secret photo spot!", badge: "tip" },
+        { name: "Lavirotte Building", addr: "29 Avenue Rapp, 75007 Paris", cat: "sight", notes: "Stunning Art Nouveau architecture" },
+        { name: "Rue Cler Market Street", addr: "Rue Cler, 75007 Paris", cat: "food", notes: "Gather picnic supplies \u2014 baker, cheesemonger, fruit stands" },
+        { name: "Amorino Ice Cream", addr: "42 Rue Cler, 75007 Paris", cat: "food", notes: "Get a cone \u2014 they make a beautiful rose! Open every day." },
+      ]},
+      { label: "4:30\u20136PM \u2014 Eiffel Tower", stops: [
+        { name: "Eiffel Tower", addr: "Eiffel Tower, Paris", cat: "sight", notes: "Summit tix 60 days out at midnight Paris time. Also 30 & 7 days out. Stairs to 2nd: 14 days out. Count ~2 hours.", badge: "reserve" },
+      ]},
+      { label: "Dinner", stops: [
+        { name: "Francette", addr: "Port de Suffren, 75007 Paris", cat: "food", notes: "Restaurant on a boat under the Eiffel Tower! See the tower sparkle at night. Reserve 1 month out.", badge: "reserve" },
+        { name: "Le Petit Cler", addr: "29 Rue Cler, 75007 Paris", cat: "food", notes: "No reservations needed, open all the time" },
+        { name: "Popu Pizza", addr: "47 Rue Cler, 75007 Paris", cat: "food", notes: "Kids make their own pizzas! Reserve via website.", badge: "reserve" },
+      ]},
+    ]
+  },
+  {
+    date: "Sat Apr 11",
+    title: "Louvre & Tuileries",
+    subtitle: "Scavenger hunt, sailboats, Dior, and the Champs-\u00c9lys\u00e9es",
+    sections: [
+      { label: "10AM \u2014 The Louvre", stops: [
+        { name: "Mus\u00e9e du Louvre", addr: "Mus\u00e9e du Louvre, 75001 Paris", cat: "sight", notes: "Private Scavenger Hunt \u2014 Paris & Beyond Tours (2 hrs). Ref #228157. Consider 10:30 start. Confirm if tickets included.", badge: "booked" },
+      ]},
+      { label: "Lunch", stops: [
+        { name: "Brasserie du Louvre", addr: "Place Andr\u00e9 Malraux, 75001 Paris", cat: "food", notes: "Classic French, great kids\u2019 menu. Reserve via website. Open daily from noon.", badge: "reserve" },
+        { name: "Little Tokyo \u2014 Rue Sainte-Anne", addr: "Rue Sainte-Anne, 75001 Paris", cat: "food", notes: "Tons of great Asian spots: Sapporo, Higuma, Jubey Udon, Hokkaido. No reservations. 10 min walk." },
+      ]},
+      { label: "Afternoon \u2014 Tuileries Gardens", stops: [
+        { name: "Tuileries Sailboats", addr: "Jardin des Tuileries, 75001 Paris", cat: "kids", notes: "Little sailboats on the fountain near the Louvre. \u20ac5/boat for 30 min. Open Wed PM & weekends, 11AM\u20136PM." },
+        { name: "Tuileries Playground", addr: "Aire de jeux pour enfants des Tuileries, Paris", cat: "kids", notes: "Playground with rope bridge \u2014 open daily" },
+        { name: "Carousel & Trampolines", addr: "Jardin des Tuileries, 75001 Paris", cat: "kids", notes: "Carousel open daily. Trampoline park \u20ac3, also open daily." },
+      ]},
+      { label: "Late Afternoon", stops: [
+        { name: "Galerie Dior", addr: "30 Avenue Montaigne, 75008 Paris", cat: "sight", notes: "Book in advance. Closed Tuesdays. Opens 11AM. Nice caf\u00e9 inside. ~20 min walk from Tuileries.", badge: "reserve" },
+        { name: "Champs-\u00c9lys\u00e9es Walk", addr: "Avenue des Champs-\u00c9lys\u00e9es, 75008 Paris", cat: "walk", notes: "Walk toward the Arc de Triomphe" },
+        { name: "Monoprix Champs-\u00c9lys\u00e9es", addr: "52 Avenue des Champs-\u00c9lys\u00e9es, 75008 Paris", cat: "shop", notes: "Stock up on snacks & souvenirs" },
+      ]},
+    ]
+  },
+  {
+    date: "Sun Apr 12",
+    title: "Versailles!",
+    subtitle: "Market, palace, gardens \u2014 a full royal day",
+    sections: [
+      { label: "Morning", stops: [
+        { name: "Train to Versailles", addr: "Gare de Versailles Ch\u00e2teau Rive Gauche", cat: "activity", notes: "~9:30a departure. Ask hotel front desk for instructions." },
+        { name: "March\u00e9 Notre-Dame", addr: "Place du March\u00e9 Notre Dame, 78000 Versailles", cat: "food", notes: "Great for strolling and picnic supplies! ~10:45a arrival." },
+      ]},
+      { label: "12:30PM \u2014 Palace Entry", stops: [
+        { name: "Palace of Versailles", addr: "Place d'Armes, 78000 Versailles", cat: "sight", notes: "Entrance A. Booking ref: 193313083. Audioguides ref: 193313129. Tickets in Apple Wallet.", badge: "booked" },
+      ]},
+    ]
+  },
+  {
+    date: "Mon Apr 13",
+    title: "Montmartre & Free PM",
+    subtitle: "Walking tour with Zo\u00e9, then maybe a theme park",
+    sections: [
+      { label: "Morning \u2014 Montmartre Tour", stops: [
+        { name: "Metro Blanche (meeting point)", addr: "Station Blanche, Paris", cat: "activity", notes: "Meet Zo\u00e9 here. 2.5 hour walking tour. Zo\u00e9 will help with lunch.", badge: "booked" },
+      ]},
+      { label: "Afternoon Option", stops: [
+        { name: "Jardin d\u2019Acclimatation", addr: "Jardin d'Acclimatation, Bois de Boulogne, 75016 Paris", cat: "kids", notes: "Vintage theme park. Count half to full day. Better on weekdays. \u20ac27 (specific day) or \u20ac46 (open).", badge: "reserve" },
+      ]},
+    ]
+  },
+  {
+    date: "Tue Apr 14",
+    title: "Free AM & Macarons",
+    subtitle: "Explore on your own, then make macarons as a family",
+    sections: [
+      { label: "Morning \u2014 Free Time", stops: [
+        { name: "Explore!", addr: "Paris, France", cat: "walk", notes: "Open morning \u2014 revisit a favorite spot or wander somewhere new" },
+      ]},
+      { label: "2\u20134:30PM \u2014 Macaron Class", stops: [
+        { name: "Cook\u2019n With Class", addr: "6 Rue Baudelique, 75018 Paris", cat: "activity", notes: "Family Macaron-Making Class. Ref #332484921, 2 Duos. Metro: Jules Joffrin (L12) or Simplon (L4). Ring bell on right.", badge: "booked" },
+      ]},
+      { label: "Dinner", stops: [
+        { name: "Qui Plume la Lune", addr: "64 Rue Amelot, 75011 Paris", cat: "food", notes: "1-star Michelin with kids\u2019 meal option! Near hotel. Reserve well in advance.", badge: "reserve" },
+      ]},
+    ]
+  },
+  {
+    date: "Wed Apr 15",
+    title: "Orangerie & Luxembourg",
+    subtitle: "Monet\u2019s water lilies, then Paris\u2019s best playground",
+    sections: [
+      { label: "Morning \u2014 Orangerie Museum", stops: [
+        { name: "Mus\u00e9e de l\u2019Orangerie", addr: "Mus\u00e9e de l'Orangerie, Jardin des Tuileries, 75001 Paris", cat: "sight", notes: "Free for kids under 18. Reserve ~3 weeks out. Count 1 hour. Bring pencils & paper for sketching. Family audio guide in EN.", badge: "reserve" },
+      ]},
+      { label: "Lunch", stops: [
+        { name: "Les Antiquaires", addr: "13 Rue du Bac, 75007 Paris", cat: "food", notes: "Cute French spot, kids\u2019 menu. Reserve if you know timing, otherwise they can squeeze you in." },
+      ]},
+      { label: "Afternoon \u2014 Luxembourg Gardens", stops: [
+        { name: "LudoJardin Playground", addr: "LudoJardin, Jardin du Luxembourg, 75006 Paris", cat: "kids", notes: "Zipline, digging equipment, great slide. \u20ac3. Clean bathrooms. Opens 10AM." },
+        { name: "Luxembourg Carousel", addr: "Jardin du Luxembourg, 75006 Paris", cat: "kids", notes: "Oldest carousel in Paris! Outer row for jousting game with metal rings. \u20ac2. Open daily." },
+        { name: "Puppet Show (Marionettes)", addr: "Th\u00e9\u00e2tre du Luxembourg, 75006 Paris", cat: "kids", notes: "Tickets 30 min before show. \u20ac7/person. Shows 11, 3:15 & 4:30PM. Wed PM, weekends & school holidays." },
+        { name: "Luxembourg Sailboats", addr: "Jardin du Luxembourg Basin, 75006 Paris", cat: "kids", notes: "\u20ac6 for 30 min. Wed PM 1\u20136PM & weekends/holidays 11AM\u20136PM." },
+        { name: "Pony Rides", addr: "Jardin du Luxembourg, 75006 Paris", cat: "kids", notes: "West of basin. \u20ac9.50/kid for 15 min. From 18 months. Wed PM & weekends/holidays." },
+      ]},
+      { label: "Afternoon Treat", stops: [
+        { name: "Caf\u00e9 de Flore", addr: "172 Boulevard Saint-Germain, 75006 Paris", cat: "food", notes: "Fancy hot chocolate! 10 min north of Luxembourg. If line is long, try Ladur\u00e9e at 21 Rue Bonaparte.", badge: "tip" },
+      ]},
+      { label: "Dinner Options", stops: [
+        { name: "Bistro des Po\u00e8mes", addr: "7 Rue Corneille, 75006 Paris", cat: "food", notes: "Wonderful French food. Set menu: lunch 2 courses \u20ac29 / 3 for \u20ac34, dinner 3 for \u20ac44. Ideally reserve.", badge: "reserve" },
+        { name: "La Brasserie des Pr\u00e9s", addr: "6 Cour du Commerce Saint-Andr\u00e9, 75006 Paris", cat: "food", notes: "Classic French, cute interior. Mains \u20ac15\u201320 are kid-friendly. Steak frites, roast chicken." },
+        { name: "Breizh Caf\u00e9 Od\u00e9on", addr: "1 Rue de l'Od\u00e9on, 75006 Paris", cat: "food", notes: "Crepes \u2014 open all day, no reservation needed." },
+      ]},
+    ]
+  },
+  {
+    date: "Thu Apr 16",
+    title: "Bastille & Last Day",
+    subtitle: "One of Paris\u2019s best outdoor markets",
+    sections: [
+      { label: "Morning", stops: [
+        { name: "March\u00e9 Bastille", addr: "Boulevard Richard-Lenoir, 75011 Paris", cat: "food", notes: "Great outdoor market! Thu & Sun, 7AM\u20132PM." },
+      ]},
+      { label: "Afternoon", stops: [
+        { name: "Food Tour?", addr: "Paris, France", cat: "activity", notes: "Open afternoon \u2014 maybe book a food tour to end the trip on a high note?" },
+      ]},
+    ]
+  }
+];
+
+function mapsSearchUrl(addr) {
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(addr);
+}
+
+function mapsRouteUrl(day) {
+  var allAddrs = [];
+  day.sections.forEach(function(s) { s.stops.forEach(function(st) {
+    if (st.addr && st.addr !== "Paris, France") allAddrs.push(st.addr);
+  }); });
+  if (allAddrs.length < 2) return mapsSearchUrl(allAddrs[0] || "Paris, France");
+  var parts = allAddrs.map(function(a) { return encodeURIComponent(a); });
+  return "https://www.google.com/maps/dir/" + parts.join("/") + "/";
+}
+
+function renderTabs() {
+  var container = document.getElementById("dayTabs");
+  DAYS.forEach(function(day, i) {
+    var tab = document.createElement("div");
+    tab.className = "day-tab" + (i === 0 ? " active" : "");
+    tab.innerHTML = day.title + '<span class="tab-day">' + day.date + '</span>';
+    tab.onclick = function() { switchDay(i); };
+    container.appendChild(tab);
+  });
+}
+
+function switchDay(idx) {
+  document.querySelectorAll(".day-tab").forEach(function(t, i) { t.classList.toggle("active", i === idx); });
+  document.querySelectorAll(".day-content").forEach(function(c, i) { c.classList.toggle("active", i === idx); });
+  document.querySelectorAll(".day-tab")[idx].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+}
+
+function renderDays() {
+  var container = document.getElementById("content");
+  DAYS.forEach(function(day, di) {
+    var div = document.createElement("div");
+    div.className = "day-content" + (di === 0 ? " active" : "");
+
+    var stopNum = 0;
+    var totalStops = 0;
+    day.sections.forEach(function(s) { totalStops += s.stops.length; });
+
+    var html = '<div class="day-header"><div><h2>' + day.title + '</h2><div class="day-meta">' + day.date + ' &bull; ' + totalStops + ' stops</div></div></div>';
+    html += '<div style="font-size:0.85rem;color:#666;margin-bottom:16px;line-height:1.5">' + day.subtitle + '</div>';
+    html += '<a class="route-btn" href="' + mapsRouteUrl(day) + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> Route All Stops in Maps</a>';
+
+    html += '<div class="legend">';
+    html += '<div class="legend-item"><div class="legend-dot" style="background:#d4785c"></div>Food</div>';
+    html += '<div class="legend-item"><div class="legend-dot" style="background:#2d3561"></div>Sight</div>';
+    html += '<div class="legend-item"><div class="legend-dot" style="background:#5a9e6f"></div>Kids</div>';
+    html += '<div class="legend-item"><div class="legend-dot" style="background:#8b6fc0"></div>Activity</div>';
+    html += '</div>';
+
+    day.sections.forEach(function(section) {
+      html += '<div class="section-label">' + section.label + '</div>';
+      section.stops.forEach(function(stop) {
+        stopNum++;
+        var catClass = "cat-" + stop.cat;
+        var badgeHtml = "";
+        if (stop.badge === "reserve") badgeHtml = '<span class="badge badge-reserve">RESERVE</span> ';
+        else if (stop.badge === "booked") badgeHtml = '<span class="badge badge-booked">BOOKED</span> ';
+        else if (stop.badge === "tip") badgeHtml = '<span class="badge badge-tip">TIP</span> ';
+        else if (stop.badge === "time") badgeHtml = '<span class="badge badge-time">TIMED</span> ';
+
+        html += '<div class="stop-card">';
+        html += '<div class="stop-num ' + catClass + '">' + stopNum + '</div>';
+        html += '<div class="stop-info">';
+        html += badgeHtml;
+        html += '<div class="stop-name">' + stop.name + '</div>';
+        if (stop.addr && stop.addr !== "Paris, France") html += '<div class="stop-address">' + stop.addr + '</div>';
+        if (stop.notes) html += '<div class="stop-notes">' + stop.notes + '</div>';
+        html += '</div>';
+        if (stop.addr && stop.addr !== "Paris, France") {
+          html += '<div class="stop-actions"><a class="nav-link" href="' + mapsSearchUrl(stop.addr) + '" target="_blank" rel="noopener">Map</a></div>';
+        }
+        html += '</div>';
+      });
+    });
+
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+}
+
+renderTabs();
+renderDays();
+</script>
+</body>
+</html>
