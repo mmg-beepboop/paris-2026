@@ -12,6 +12,72 @@
     color: #2c2c2c;
     min-height: 100vh;
   }
+  /* ---- Password gate ---- */
+  #lock-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 50%, #1a1a2e 100%);
+    padding: 24px;
+    text-align: center;
+  }
+  #lock-screen .lock-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  #lock-screen h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  #lock-screen p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    margin-bottom: 28px;
+  }
+  #lock-screen .pw-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+  }
+  #lock-screen input {
+    padding: 14px 18px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #lock-screen input::placeholder { color: rgba(255,255,255,0.35); }
+  #lock-screen input:focus { border-color: #c9a94e; }
+  #lock-screen button {
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #c9a94e, #b8942e);
+    color: #1a1a2e;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  #lock-screen button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,169,78,0.3); }
+  #lock-screen .error-msg {
+    color: #e57373;
+    font-size: 0.82rem;
+    min-height: 1.2em;
+  }
+  /* ---- Main app (hidden until unlocked) ---- */
+  #app { display: none; }
+  #app.unlocked { display: block; }
   header {
     background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
     color: #fff;
@@ -220,6 +286,21 @@
 </head>
 <body>
 
+<!-- Password Gate -->
+<div id="lock-screen">
+  <div class="lock-icon">ð</div>
+  <h1>Paris 2026</h1>
+  <p>Enter the password to view the trip guide</p>
+  <div class="pw-form">
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off" />
+    <button id="pw-btn" onclick="tryUnlock()">Unlock</button>
+    <div class="error-msg" id="pw-error"></div>
+  </div>
+</div>
+
+<!-- Main App (hidden until unlocked) -->
+<div id="app">
+
 <header>
   <h1>Paris &mdash; April 2026</h1>
   <p>Day-by-Day Walking Guide &bull; Tap any stop to navigate</p>
@@ -229,8 +310,42 @@
 
 <div class="content" id="content"></div>
 
+</div>
+
 <script>
-const DAYS = [
+// --- Password check using SHA-256 ---
+var PASS_HASH = "32b65e90d10be5fe14f417bf90f0c4dae45ed75615f7602e66f506085846a617";
+
+async function sha256(str) {
+  var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, "0"); }).join("");
+}
+
+async function tryUnlock() {
+  var pw = document.getElementById("pw-input").value;
+  var hash = await sha256(pw);
+  if (hash === PASS_HASH) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("app").classList.add("unlocked");
+    renderTabs();
+    renderDays();
+  } else {
+    document.getElementById("pw-error").textContent = "Wrong password â try again";
+    document.getElementById("pw-input").value = "";
+    document.getElementById("pw-input").focus();
+  }
+}
+
+// Allow Enter key to submit
+document.getElementById("pw-input").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") tryUnlock();
+});
+
+// Auto-focus password field
+document.getElementById("pw-input").focus();
+
+// --- Trip data & rendering ---
+var DAYS = [
   {
     date: "Thu Apr 9",
     title: "Arrival & the Islands",
@@ -486,9 +601,6 @@ function renderDays() {
     container.appendChild(div);
   });
 }
-
-renderTabs();
-renderDays();
 </script>
 </body>
 </html>
