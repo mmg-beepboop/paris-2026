@@ -182,6 +182,16 @@
     transition: box-shadow 0.15s;
   }
   .stop-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .stop-emoji {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-top: 2px;
+  }
   .stop-num {
     flex-shrink: 0;
     width: 28px;
@@ -565,10 +575,13 @@ function renderDays() {
     html += '<a class="route-btn" href="' + mapsRouteUrl(day) + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> Route All Stops in Maps</a>';
 
     html += '<div class="legend">';
-    html += '<div class="legend-item"><div class="legend-dot" style="background:#d4785c"></div>Food</div>';
-    html += '<div class="legend-item"><div class="legend-dot" style="background:#2d3561"></div>Sight</div>';
-    html += '<div class="legend-item"><div class="legend-dot" style="background:#5a9e6f"></div>Kids</div>';
-    html += '<div class="legend-item"><div class="legend-dot" style="background:#8b6fc0"></div>Activity</div>';
+    html += '<div class="legend-item">🥐 Food</div>';
+    html += '<div class="legend-item">📍 Sight</div>';
+    html += '<div class="legend-item">🧒 Kids</div>';
+    html += '<div class="legend-item">🎨 Activity</div>';
+    html += '<div class="legend-item">🏨 Hotel</div>';
+    html += '<div class="legend-item">🛍️ Shop</div>';
+    html += '<div class="legend-item">🚶 Walk</div>';
     html += '</div>';
 
     day.sections.forEach(function(section) {
@@ -583,7 +596,8 @@ function renderDays() {
         else if (stop.badge === "time") badgeHtml = '<span class="badge badge-time">TIMED</span> ';
 
         html += '<div class="stop-card">';
-        html += '<div class="stop-num ' + catClass + '">' + stopNum + '</div>';
+        var EMOJI = { food: "🥐", sight: "📍", kids: "🧒", activity: "🎨", hotel: "🏨", shop: "🛍️", walk: "🚶" };
+        html += '<div class="stop-emoji">' + (EMOJI[stop.cat] || stopNum) + '</div>';
         html += '<div class="stop-info">';
         html += badgeHtml;
         html += '<div class="stop-name">' + stop.name + '</div>';
