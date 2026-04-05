@@ -356,12 +356,8 @@ document.getElementById("pw-input").addEventListener("keydown", function(e) {
   if (e.key === "Enter") tryUnlock();
 });
 
-// Auto-unlock if previously authenticated
-if (localStorage.getItem("paris2026_unlocked") === "true") {
-  unlock();
-} else {
-  document.getElementById("pw-input").focus();
-}
+// Auto-focus password field (auto-unlock moved to end of script)
+document.getElementById("pw-input").focus();
 
 // --- Trip data & rendering ---
 var DAYS = [
@@ -623,6 +619,10 @@ function renderDays() {
     div.innerHTML = html;
     container.appendChild(div);
   });
+}
+// Auto-unlock if previously authenticated (must run after DAYS and render functions are defined)
+if (localStorage.getItem("paris2026_unlocked") === "true") {
+  unlock();
 }
 </script>
 </body>
