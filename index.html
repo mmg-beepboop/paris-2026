@@ -331,14 +331,19 @@ async function sha256(str) {
   return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, "0"); }).join("");
 }
 
+function unlock() {
+  document.getElementById("lock-screen").style.display = "none";
+  document.getElementById("app").classList.add("unlocked");
+  renderTabs();
+  renderDays();
+}
+
 async function tryUnlock() {
   var pw = document.getElementById("pw-input").value;
   var hash = await sha256(pw);
   if (hash === PASS_HASH) {
-    document.getElementById("lock-screen").style.display = "none";
-    document.getElementById("app").classList.add("unlocked");
-    renderTabs();
-    renderDays();
+    localStorage.setItem("paris2026_unlocked", "true");
+    unlock();
   } else {
     document.getElementById("pw-error").textContent = "Wrong password â try again";
     document.getElementById("pw-input").value = "";
@@ -351,8 +356,12 @@ document.getElementById("pw-input").addEventListener("keydown", function(e) {
   if (e.key === "Enter") tryUnlock();
 });
 
-// Auto-focus password field
-document.getElementById("pw-input").focus();
+// Auto-unlock if previously authenticated
+if (localStorage.getItem("paris2026_unlocked") === "true") {
+  unlock();
+} else {
+  document.getElementById("pw-input").focus();
+}
 
 // --- Trip data & rendering ---
 var DAYS = [
