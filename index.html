@@ -385,11 +385,11 @@ var DAYS = [
       ]},
       { label: "Dinner near Hotel", stops: [
         { name: "Carette", addr: "25 Place des Vosges, 75003 Paris", cat: "food", notes: "Famous hot chocolate & breakfast spot" },
-        { name: "Chez Janou", addr: "2 Rue Roger Verlomme, 75003 Paris", cat: "food", notes: "Reserve via website. 2 min walk from hotel.", badge: "reserve" },
+        { name: "Chez Janou", addr: "2 Rue Roger Verlomme, 75003 Paris", cat: "food", notes: "Reserve via website. 2 min walk from hotel.", badge: "reserve", reserveUrl: "https://bookings.zenchef.com/results?rid=373873&pid=1001" },
         { name: "Breizh Caf\u00e9 Marais", addr: "109 Rue Vieille du Temple, 75003 Paris", cat: "food", notes: "Crepes! 10 min walk" },
         { name: "L\u2019As du Fallafel", addr: "34 Rue des Rosiers, 75004 Paris", cat: "food", notes: "Most famous falafel on Rue des Rosiers. Closed Saturdays. No reservations. 10 min walk." },
-        { name: "BigLove", addr: "30 Rue Debelleyme, 75003 Paris", cat: "food", notes: "Italian. 10 min walk. Reserve.", badge: "reserve" },
-        { name: "Jaja", addr: "3 Rue Sainte-Croix de la Bretonnerie, 75004 Paris", cat: "food", notes: "10 min walk. Reserve. No kids menu but works for adventurous eaters.", badge: "reserve" },
+        { name: "BigLove", addr: "30 Rue Debelleyme, 75003 Paris", cat: "food", notes: "Italian. 10 min walk. Reserve.", badge: "reserve", reserveUrl: "https://www.sevenrooms.com/reservations/bigloveparis" },
+        { name: "Jaja", addr: "3 Rue Sainte-Croix de la Bretonnerie, 75004 Paris", cat: "food", notes: "10 min walk. Reserve. No kids menu but works for adventurous eaters.", badge: "reserve", reserveUrl: "https://jaja-resto.com/" },
       ]},
     ]
   },
@@ -418,9 +418,9 @@ var DAYS = [
         { name: "Eiffel Tower", addr: "Eiffel Tower, Paris", cat: "sight", notes: "Summit tix 60 days out at midnight Paris time. Also 30 & 7 days out. Stairs to 2nd: 14 days out. Count ~2 hours.", badge: "reserve" },
       ]},
       { label: "Dinner", stops: [
-        { name: "Francette", addr: "Port de Suffren, 75007 Paris", cat: "food", notes: "Restaurant on a boat under the Eiffel Tower! See the tower sparkle at night. Reserve 1 month out.", badge: "reserve" },
+        { name: "Francette", addr: "Port de Suffren, 75007 Paris", cat: "food", notes: "Restaurant on a boat under the Eiffel Tower! See the tower sparkle at night. Reserve 1 month out.", badge: "reserve", reserveUrl: "https://www.thefork.com/restaurant/francette-r711098" },
         { name: "Le Petit Cler", addr: "29 Rue Cler, 75007 Paris", cat: "food", notes: "No reservations needed, open all the time" },
-        { name: "Popu Pizza", addr: "47 Rue Cler, 75007 Paris", cat: "food", notes: "Kids make their own pizzas! Reserve via website.", badge: "reserve" },
+        { name: "Popu Pizza", addr: "47 Rue Cler, 75007 Paris", cat: "food", notes: "Kids make their own pizzas! Reserve via website.", badge: "reserve", reserveUrl: "https://popupizza.fr/" },
       ]},
     ]
   },
@@ -433,7 +433,7 @@ var DAYS = [
         { name: "Mus\u00e9e du Louvre", addr: "Mus\u00e9e du Louvre, 75001 Paris", cat: "sight", notes: "Private Scavenger Hunt \u2014 Paris & Beyond Tours (2 hrs). Ref #228157. Consider 10:30 start. Confirm if tickets included.", badge: "booked" },
       ]},
       { label: "Lunch", stops: [
-        { name: "Brasserie du Louvre", addr: "Place Andr\u00e9 Malraux, 75001 Paris", cat: "food", notes: "Classic French, great kids\u2019 menu. Reserve via website. Open daily from noon.", badge: "reserve" },
+        { name: "Brasserie du Louvre", addr: "Place Andr\u00e9 Malraux, 75001 Paris", cat: "food", notes: "Classic French, great kids\u2019 menu. Reserve via website. Open daily from noon.", badge: "reserve", reserveUrl: "https://www.thefork.com/restaurant/brasserie-du-louvre-r31073" },
         { name: "Little Tokyo \u2014 Rue Sainte-Anne", addr: "Rue Sainte-Anne, 75001 Paris", cat: "food", notes: "Tons of great Asian spots: Sapporo, Higuma, Jubey Udon, Hokkaido. No reservations. 10 min walk." },
       ]},
       { label: "Afternoon \u2014 Tuileries Gardens", stops: [
@@ -442,7 +442,7 @@ var DAYS = [
         { name: "Carousel & Trampolines", addr: "Jardin des Tuileries, 75001 Paris", cat: "kids", notes: "Carousel open daily. Trampoline park \u20ac3, also open daily." },
       ]},
       { label: "Late Afternoon", stops: [
-        { name: "Galerie Dior", addr: "30 Avenue Montaigne, 75008 Paris", cat: "sight", notes: "Book in advance. Closed Tuesdays. Opens 11AM. Nice caf\u00e9 inside. ~20 min walk from Tuileries.", badge: "reserve" },
+        { name: "Galerie Dior", addr: "30 Avenue Montaigne, 75008 Paris", cat: "sight", notes: "Book in advance. Closed Tuesdays. Opens 11AM. Nice caf\u00e9 inside. ~20 min walk from Tuileries.", badge: "reserve", reserveUrl: "https://www.galeriedior.com" },
         { name: "Champs-\u00c9lys\u00e9es Walk", addr: "Avenue des Champs-\u00c9lys\u00e9es, 75008 Paris", cat: "walk", notes: "Walk toward the Arc de Triomphe" },
         { name: "Monoprix Champs-\u00c9lys\u00e9es", addr: "52 Avenue des Champs-\u00c9lys\u00e9es, 75008 Paris", cat: "shop", notes: "Stock up on snacks & souvenirs" },
       ]},
@@ -487,7 +487,7 @@ var DAYS = [
         { name: "Cook\u2019n With Class", addr: "6 Rue Baudelique, 75018 Paris", cat: "activity", notes: "Family Macaron-Making Class. Ref #332484921, 2 Duos. Metro: Jules Joffrin (L12) or Simplon (L4). Ring bell on right.", badge: "booked" },
       ]},
       { label: "Dinner", stops: [
-        { name: "Qui Plume la Lune", addr: "64 Rue Amelot, 75011 Paris", cat: "food", notes: "1-star Michelin with kids\u2019 meal option! Near hotel. Reserve well in advance.", badge: "reserve" },
+        { name: "Qui Plume la Lune", addr: "64 Rue Amelot, 75011 Paris", cat: "food", notes: "1-star Michelin with kids\u2019 meal option! Near hotel. Reserve well in advance.", badge: "reserve", reserveUrl: "https://www.thefork.fr/restaurant/qui-plume-la-lune-jacky-ribault-r11295" },
       ]},
     ]
   },
@@ -513,7 +513,7 @@ var DAYS = [
         { name: "Caf\u00e9 de Flore", addr: "172 Boulevard Saint-Germain, 75006 Paris", cat: "food", notes: "Fancy hot chocolate! 10 min north of Luxembourg. If line is long, try Ladur\u00e9e at 21 Rue Bonaparte.", badge: "tip" },
       ]},
       { label: "Dinner Options", stops: [
-        { name: "Bistro des Po\u00e8mes", addr: "7 Rue Corneille, 75006 Paris", cat: "food", notes: "Wonderful French food. Set menu: lunch 2 courses \u20ac29 / 3 for \u20ac34, dinner 3 for \u20ac44. Ideally reserve.", badge: "reserve" },
+        { name: "Bistro des Po\u00e8mes", addr: "7 Rue Corneille, 75006 Paris", cat: "food", notes: "Wonderful French food. Set menu: lunch 2 courses \u20ac29 / 3 for \u20ac34, dinner 3 for \u20ac44. Ideally reserve.", badge: "reserve", reserveUrl: "https://www.thefork.fr/restaurant/bistro-des-poemes-r899498" },
         { name: "La Brasserie des Pr\u00e9s", addr: "6 Cour du Commerce Saint-Andr\u00e9, 75006 Paris", cat: "food", notes: "Classic French, cute interior. Mains \u20ac15\u201320 are kid-friendly. Steak frites, roast chicken." },
         { name: "Breizh Caf\u00e9 Od\u00e9on", addr: "1 Rue de l'Od\u00e9on, 75006 Paris", cat: "food", notes: "Crepes \u2014 open all day, no reservation needed." },
       ]},
@@ -609,8 +609,11 @@ function renderDays() {
         if (stop.addr && stop.addr !== "Paris, France") html += '<div class="stop-address">' + stop.addr + '</div>';
         if (stop.notes) html += '<div class="stop-notes">' + stop.notes + '</div>';
         html += '</div>';
-        if (stop.addr && stop.addr !== "Paris, France") {
-          html += '<div class="stop-actions"><a class="nav-link" href="' + mapsSearchUrl(stop.addr) + '" target="_blank" rel="noopener">Map</a></div>';
+        if (stop.addr && stop.addr !== "Paris, France" || stop.reserveUrl) {
+          html += '<div class="stop-actions">';
+          if (stop.reserveUrl) html += '<a class="nav-link" href="' + stop.reserveUrl + '" target="_blank" rel="noopener" style="background:#c9a94e;color:#1a1a2e;font-weight:700;">Reserve</a>';
+          if (stop.addr && stop.addr !== "Paris, France") html += '<a class="nav-link" href="' + mapsSearchUrl(stop.addr) + '" target="_blank" rel="noopener">Map</a>';
+          html += '</div>';
         }
         html += '</div>';
       });
